@@ -744,6 +744,20 @@ This will return the user to "https://www.example.org/logged_out.html"
 after the logout operation has completed.
 
 
+## Invalidating session
+It is possible to invalidate the current mod_auth_mellon session, 
+without calling SLO. The mod_auth_mellon cookie session will be 
+invalidated and the session will be removed from the mod_auth_mellon cache. 
+SLO will not be possible after the mod_auth_mellon session is invalidated.
+If this functionality is enabled, invalidate the session by calling 
+the endpoint "<endpoint path>/invalidate".
+Here is a sample configuration to enabled this feature:
+```ApacheConf
+MellonEnabledInvalidateSessionEndpoint On
+```
+Default value is Off
+
+
 ## Probe IdP discovery 
 
 mod_auth_mellon has an IdP probe discovery service that sends HTTP GET
