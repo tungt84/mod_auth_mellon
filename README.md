@@ -893,9 +893,10 @@ There's a mailing list for discussion and support.
 ## Reporting security vulnerabilities
 
 For reporting security vulnerabilities in mod_auth_mellon, please contact
-the maintainer directly at the following email address:
+the maintainers directly at the following email address:
 
-  olav.morken@uninett.no
+  jhrozek@redhat.com
+  simo@redhat.com
 
 This allows us to coordinate the disclosure of the vulnerability with the
 fixes for the vulnerability.
