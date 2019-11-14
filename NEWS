@@ -1,3 +1,39 @@
+Version 0.15.0
+---------------------------------------------------------------------------
+
+Security fixes:
+
+* [CVE-2019-13038] Redirect URL validation bypass
+
+  Version 0.14.1 and older of mod_auth_mellon allows the redirect URL
+  validation to be bypassed by specifying an URL formatted as
+  "http:www.hostname.com". In this case, the APR parsing utility
+  would parse the scheme as http, host as NULL and path as www.hostname.com.
+  Browsers, however, interpret the URL differently and redirect to
+  www.hostname.com. This could be reproduced with:
+     https://application.com/mellon/login?ReturnTo=http:www.hostname.com
+
+  This version fixes that issue by rejecting all URLs with
+  scheme, but no host name.
+
+Enhancements:
+
+ * A XSLT script that allows converting attribute maps from Shibboleth
+   to a set of MellonSetEnvNoPrefix entries was added. The script can
+   be found at doc/mellon-attribute-map.xsl
+
+ * A new configuration option MellonEnvPrefix was added. This option allows
+   you to configure the variable prefix, which normally defaults to MELLON_
+
+ * A new configuration option MellonAuthnContextComparisonType was added.
+   This option allows you to set the "Comparison" attribute within
+   the AuthnRequest
+
+Notable bug fixes:
+
+  * Compilation issues on Solaris were fixed
+
+
 Version 0.14.2
 ---------------------------------------------------------------------------
 
