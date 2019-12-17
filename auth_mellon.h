@@ -315,6 +315,9 @@ typedef struct am_dir_cfg_rec {
 
     /* List of domains we can redirect to. */
     const char * const *redirect_domains;
+
+    /* Enabled the session invalidate endpoint. */
+    int enabled_invalidation_session;
 } am_dir_cfg_rec;
 
 /* Bitmask for PAOS service options */

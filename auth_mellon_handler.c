@@ -807,6 +807,72 @@ exit:
     return rc;
 }
 
+/* This function handles an invalidate request.
+ *
+ * Parameters:
+ *  request_rec *r       The logout request.
+ *
+ * Returns:
+ *  OK on success, or an error if any of the steps fail.
+ */
+static int am_handle_invalidate_request(request_rec *r)
+{
+    int rc;
+    char *return_to;
+    am_cache_entry_t *session = am_get_request_session(r);
+    am_dir_cfg_rec *cfg = am_get_dir_cfg(r);
+
+    /* Check if the session invalidation endpoint is enabled. */
+    if (cfg->enabled_invalidation_session == 0) {
+        AM_LOG_RERROR(APLOG_MARK, APLOG_ERR, 0, r,
+                      "Session Invalidation Endpoint is not enabled.");
+        return HTTP_BAD_REQUEST;
+    }
+
+    am_diag_printf(r, "enter function %s\n", __func__);
+    am_diag_log_cache_entry(r, 0, session, "%s\n", __func__);
+
+    return_to = am_extract_query_parameter(r->pool, r->args, "ReturnTo");
+
+    if (return_to == NULL) {
+        AM_LOG_RERROR(APLOG_MARK, APLOG_ERR, 0, r,
+                      "No ReturnTo parameter provided for invalidate handler.");
+        return HTTP_BAD_REQUEST;
+    }
+
+    /* Check for bad characters in ReturnTo. */
+    rc = am_check_url(r, return_to);
+    if (rc != OK) {
+        return rc;
+    }
+
+    rc = am_urldecode(return_to);
+    if (rc != OK) {
+        AM_LOG_RERROR(APLOG_MARK, APLOG_ERR, rc, r,
+                      "Could not urldecode ReturnTo value in invalidate"
+                      " response.");
+        return HTTP_BAD_REQUEST;
+    }
+
+    /* Make sure that it is a valid redirect URL. */
+    rc = am_validate_redirect_url(r, return_to);
+    if (rc != OK) {
+        AM_LOG_RERROR(APLOG_MARK, APLOG_ERR, 0, r,
+                      "Invalid target domain in invalidate response ReturnTo parameter.");
+        return rc;
+    }
+
+    if (session == NULL) {
+        AM_LOG_RERROR(APLOG_MARK, APLOG_ERR, 0, r,
+                      "Error processing invalidate request message."
+                      " No session found.");
+    } else {
+        am_delete_request_session(r, session);
+    }
+
+    apr_table_setn(r->headers_out, "Location", return_to);
+    return HTTP_SEE_OTHER;
+}
 
 /* This function handles a logout response message from the IdP. We get
  * this message after we have sent a logout request to the IdP.
@@ -1139,6 +1205,25 @@ static int am_handle_logout(request_rec *r)
     }
 }
 
+/* This function handles requests to the invalidate handler.
+ *
+ * Parameters:
+ *  request_rec *r       The request.
+ *
+ * Returns:
+ *  OK on success, or an error if any of the steps fail.
+ */
+static int am_handle_invalidate(request_rec *r)
+{
+    LassoServer *server;
+
+    server = am_get_lasso_server(r);
+    if (server == NULL) {
+        return HTTP_INTERNAL_SERVER_ERROR;
+    }
+
+    return am_handle_invalidate_request(r);
+}
 
 /* This function parses a timestamp for a SAML 2.0 condition.
  *
@@ -3541,6 +3626,8 @@ int am_handler(request_rec *r)
          * with version 0.0.6 and older.
          */
         return am_handle_logout(r);
+    } else if(!strcmp(endpoint, "invalidate")) {
+        return am_handle_invalidate(r);
     } else if(!strcmp(endpoint, "login")) {
         return am_handle_login(r);
     } else if(!strcmp(endpoint, "probeDisco")) {
