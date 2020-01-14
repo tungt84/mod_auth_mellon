@@ -1,3 +1,17 @@
+Version 0.16.0
+---------------------------------------------------------------------------
+
+Enhancements:
+
+ * The MellonCookieSameSite option accepts a new valid "None". This is intended
+   to be used together with "MellonSecureCookie On". With some newer browsers,
+   only cookies with "SameSite=None; Secure" would be available for cross-site
+   access.
+
+ * A new option MellonEnabledInvalidateSessionEndpoint was added. When this
+   option is enabled, then a user can invalidate their session locally by
+   calling the "/invalidate" endpoint.
+
 Version 0.15.0
 ---------------------------------------------------------------------------
 
