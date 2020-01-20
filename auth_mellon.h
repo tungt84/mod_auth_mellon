@@ -96,6 +96,11 @@ typedef enum {
 } am_diag_flags_t;
 #endif
 
+
+/* Disable SameSite Environment Value */
+#define AM_DISABLE_SAMESITE_ENV_VAR "MELLON_DISABLE_SAMESITE"
+
+
 /* This is the length of the id we use (for session IDs and
  * replaying POST data).
  */
