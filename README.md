@@ -230,9 +230,9 @@ MellonDiagnosticsEnable Off
         # MELLON_DISABLE_SAMESITE environment variable suppresses 
         # unnecessary setting of SameSite cookies
         # SetEnvIf User-Agent ^.*Chrome\/5[1-9|6[0-6].* MELLON_DISABLE_SAMESITE]
-        # SetEnvIf User-Agent ^.*UCBrowser\/[0-9]|1[0-1].*$ MELLON_DISABLE_SAMESITE
-        # SetEnvIf User-Agent ^.*UCBrowser\/12\.[0-9]|1[0-3].*$ MELLON_DISABLE_SAMESITE
-        # SetEnvIf User-Agent ^.*UCBrowser\/12\.13\.[0-1].*$ MELLON_DISABLE_SAMESITE
+        # SetEnvIf User-Agent ^.*Android.*UCBrowser\/[0-9]|1[0-1].*$ MELLON_DISABLE_SAMESITE
+        # SetEnvIf User-Agent ^.*Android.*UCBrowser\/12\.[0-9]|1[0-3].*$ MELLON_DISABLE_SAMESITE
+        # SetEnvIf User-Agent ^.*Android.*UCBrowser\/12\.13\.[0-1].*$ MELLON_DISABLE_SAMESITE
         # SetEnvIf User-Agent ^.*iPhone; CPU iPhone OS 1[0-2].*$ MELLON_DISABLE_SAMESITE
         # SetEnvIf User-Agent ^.*iPad; CPU OS 1[0-2].*$ MELLON_DISABLE_SAMESITE
         # SetEnvIf User-Agent ^.*iPod touch; CPU iPhone OS 1[0-2].*$ MELLON_DISABLE_SAMESITE
