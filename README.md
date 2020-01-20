@@ -229,7 +229,7 @@ MellonDiagnosticsEnable Off
         # Some browsers will reject cookies if SameSite is specified.
         # MELLON_DISABLE_SAMESITE environment variable suppresses 
         # unnecessary setting of SameSite cookies
-        # SetEnvIf User-Agent ^.*Chrome\/5[1-9|6[0-6].* MELLON_DISABLE_SAMESITE]
+        # SetEnvIf User-Agent ^.*Chrome\/5[1-9]|6[0-6].* MELLON_DISABLE_SAMESITE
         # SetEnvIf User-Agent ^.*Android.*UCBrowser\/[0-9]|1[0-1].*$ MELLON_DISABLE_SAMESITE
         # SetEnvIf User-Agent ^.*Android.*UCBrowser\/12\.[0-9]|1[0-3].*$ MELLON_DISABLE_SAMESITE
         # SetEnvIf User-Agent ^.*Android.*UCBrowser\/12\.13\.[0-1].*$ MELLON_DISABLE_SAMESITE
