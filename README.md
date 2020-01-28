@@ -226,6 +226,18 @@ MellonDiagnosticsEnable Off
         # Default: not set
         # MellonCookieSameSite lax
 
+        # Some browsers will reject cookies if SameSite is specified.
+        # MELLON_DISABLE_SAMESITE environment variable suppresses 
+        # unnecessary setting of SameSite cookies
+        # SetEnvIf User-Agent ^.*Chrome\/5[1-9]|6[0-6].* MELLON_DISABLE_SAMESITE
+        # SetEnvIf User-Agent ^.*Android.*UCBrowser\/[0-9]|1[0-1].*$ MELLON_DISABLE_SAMESITE
+        # SetEnvIf User-Agent ^.*Android.*UCBrowser\/12\.[0-9]|1[0-3].*$ MELLON_DISABLE_SAMESITE
+        # SetEnvIf User-Agent ^.*Android.*UCBrowser\/12\.13\.[0-1].*$ MELLON_DISABLE_SAMESITE
+        # SetEnvIf User-Agent ^.*iPhone; CPU iPhone OS 1[0-2].*$ MELLON_DISABLE_SAMESITE
+        # SetEnvIf User-Agent ^.*iPad; CPU OS 1[0-2].*$ MELLON_DISABLE_SAMESITE
+        # SetEnvIf User-Agent ^.*iPod touch; CPU iPhone OS 1[0-2].*$ MELLON_DISABLE_SAMESITE
+        # SetEnvIf User-Agent ^.*Macintosh; Intel Mac OS X.*Version\/1[0-2].*Safari.*$ MELLON_DISABLE_SAMESITE
+
         # MellonUser selects which attribute we should use for the username.
         # The username is passed on to other apache modules and to the web
         # page the user visits. NAME_ID is an attribute which we set to
