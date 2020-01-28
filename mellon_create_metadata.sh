@@ -41,6 +41,7 @@ echo "Output files:"
 echo "Private key:               $OUTFILE.key"
 echo "Certificate:               $OUTFILE.cert"
 echo "Metadata:                  $OUTFILE.xml"
+echo
 echo "Host:                      $HOST"
 echo
 echo "Endpoints:"
