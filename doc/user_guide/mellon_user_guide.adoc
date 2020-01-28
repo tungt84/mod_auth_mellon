@@ -1634,7 +1634,7 @@ Mellon authentication. This requires at a minimum these 3 directives:
 
 === How is Mellon metadata created? [[metadata_creation]]
 
-The purpose of SAML metadata is describe in <<metadata>>. An annotated
+The purpose of SAML metadata is described in <<metadata>>. An annotated
 example of Mellon metadata is presented in <<sp_metadata>>. There are
 multiple ways one can create Mellon metadata:
 
