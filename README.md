@@ -227,16 +227,19 @@ MellonDiagnosticsEnable Off
         # MellonCookieSameSite lax
 
         # Some browsers will reject cookies if SameSite is specified.
-        # MELLON_DISABLE_SAMESITE environment variable suppresses 
-        # unnecessary setting of SameSite cookies
-        # SetEnvIf User-Agent ^.*Chrome\/(5[1-9]|6[0-6]).*$ MELLON_DISABLE_SAMESITE
-        # SetEnvIf User-Agent ^.*Android.*UCBrowser\/([0-9]|1[0-1]).*$ MELLON_DISABLE_SAMESITE
-        # SetEnvIf User-Agent ^.*Android.*UCBrowser\/12\.([0-9]|1[0-2]).*$ MELLON_DISABLE_SAMESITE
-        # SetEnvIf User-Agent ^.*Android.*UCBrowser\/12\.13\.[0-1].*$ MELLON_DISABLE_SAMESITE
-        # SetEnvIf User-Agent ^.*iPhone; CPU iPhone OS 1[0-2].*$ MELLON_DISABLE_SAMESITE
-        # SetEnvIf User-Agent ^.*iPad; CPU OS 1[0-2].*$ MELLON_DISABLE_SAMESITE
-        # SetEnvIf User-Agent ^.*iPod touch; CPU iPhone OS 1[0-2].*$ MELLON_DISABLE_SAMESITE
-        # SetEnvIf User-Agent ^.*Macintosh; Intel Mac OS X.*Version\/1[0-2].*Safari.*$ MELLON_DISABLE_SAMESITE
+        # The MELLON_DISABLE_SAMESITE environment variable suppresses
+        # setting of SameSite cookies. You can use the following directives
+        # to set it.
+        # BrowserMatch "\(iP.+; CPU .*OS 12[_\d]*.*\) AppleWebKit\/" MELLON_DISABLE_SAMESITE=1
+        # BrowserMatch "\(Macintosh;.*Mac OS X 10_14[_\d]*.*\) AppleWebKit\/.*Version\/.* Safari\/" MELLON_DISABLE_SAMESITE=1
+        # BrowserMatch "^Mozilla\/[\.\d]+ \(Macintosh;.*Mac OS X 10_14[_\d]*.*\) .* AppleWebKit\/[\.\d]+ \(KHTML, like Gecko\)$" MELLON_DISABLE_SAMESITE=1
+        # BrowserMatch "UCBrowser\/(8|9|10|11)\.(\d+)\.(\d+)[\.\d]* " MELLON_DISABLE_SAMESITE=1
+        # BrowserMatch "UCBrowser\/12\.13\.[0-1][\.\d]* " MELLON_DISABLE_SAMESITE=1
+        # BrowserMatch "UCBrowser\/12\.1[0-2]\.(\d+)[\.\d]* " MELLON_DISABLE_SAMESITE=1
+        # BrowserMatch "UCBrowser\/12\.\d\.(\d+)[\.\d]* " MELLON_DISABLE_SAMESITE=1
+        # BrowserMatch "Chrom[^ \/]+\/6[0-6][\.\d]* " MELLON_DISABLE_SAMESITE=1
+        # BrowserMatch "Chrom[^ \/]+\/5[1-9][\.\d]* " MELLON_DISABLE_SAMESITE=1
+
 
         # MellonUser selects which attribute we should use for the username.
         # The username is passed on to other apache modules and to the web
