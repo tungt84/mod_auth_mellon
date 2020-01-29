@@ -420,7 +420,7 @@ am_diag_log_dir_cfg(request_rec *r, int level, am_dir_cfg_rec *cfg,
                     indent(level+1), cfg->varname);
     apr_file_printf(diag_cfg->fd,
                     "%sMellonSecureCookie (secure): %s\n",
-                    indent(level+1), cfg->secure ? "On":"Off"); /* FIXME, should be combined? */
+                    indent(level+1), cfg->secure ? "On":"Off");
     apr_file_printf(diag_cfg->fd,
                     "%sMellonSecureCookie (httpd_only): %s\n",
                     indent(level+1), cfg->http_only ? "On":"Off");
