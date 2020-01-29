@@ -57,7 +57,7 @@ TEMPLATEFILE="$(mktemp -t mellon_create_sp.XXXXXXXXXX)"
 cat >"$TEMPLATEFILE" <<EOF
 RANDFILE           = /dev/urandom
 [req]
-default_bits       = 2048
+default_bits       = 3072
 default_keyfile    = privkey.pem
 distinguished_name = req_distinguished_name
 prompt             = no
