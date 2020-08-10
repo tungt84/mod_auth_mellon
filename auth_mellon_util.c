@@ -463,7 +463,7 @@ int am_check_permissions(request_rec *r, am_cache_entry_t *session)
             if (value == NULL) {
                  match = 0;          /* can not happen */
 
-            } else if (ce->flags & (AM_COND_FLAG_REG|AM_COND_FLAG_REF)) {
+            } else if ((ce->flags & AM_COND_FLAG_REG) && (ce->flags & AM_COND_FLAG_REF)) {
                  int nsub = ce->regex->re_nsub + 1;
                  ap_regmatch_t *regmatch;
 
@@ -477,7 +477,7 @@ int am_check_permissions(request_rec *r, am_cache_entry_t *session)
             } else if (ce->flags & AM_COND_FLAG_REG) {
                  match = !ap_regexec(ce->regex, value, 0, NULL, 0);
 
-            } else if (ce->flags & (AM_COND_FLAG_SUB|AM_COND_FLAG_NC)) {
+            } else if ((ce->flags & AM_COND_FLAG_SUB) && (ce->flags & AM_COND_FLAG_NC)) {
                  match = (ap_strcasestr(ce->str, value) != NULL);
 
             } else if (ce->flags & AM_COND_FLAG_SUB) {
