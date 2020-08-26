@@ -232,7 +232,7 @@ const am_cond_t *am_cond_substitue(request_rec *r, const am_cond_t *ce,
         /* 
          * Make sure we got a %
          */
-	assert(instr[i] == '%');
+        assert(instr[i] == '%');
 
         /*
          * Copy the format string in fstr. It can be a single 
@@ -393,7 +393,7 @@ int am_check_permissions(request_rec *r, am_cache_entry_t *session)
                        am_diag_cond_str(r, ce));
 
         /*
-         * Rule with ignore flog?
+         * Rule with ignore flag?
          */
         if (ce->flags & AM_COND_FLAG_IGN)
             continue;
@@ -449,7 +449,7 @@ int am_check_permissions(request_rec *r, am_cache_entry_t *session)
             value = am_cache_entry_get_string(session, &session->env[j].value);
 
             /*
-             * Substiture backrefs if available
+             * Substitute backrefs if available
              */
             if (ce->flags & AM_COND_FLAG_FSTR)
                 ce = am_cond_substitue(r, ce, backrefs);
@@ -490,7 +490,7 @@ int am_check_permissions(request_rec *r, am_cache_entry_t *session)
                  match = !strcmp(ce->str, value);
             }
 
-        am_diag_printf(r, "match=%s, ", match ? "yes" : "no");
+            am_diag_printf(r, "match=%s, ", match ? "yes" : "no");
         }
 
         if (ce->flags & AM_COND_FLAG_NOT) {
@@ -1786,7 +1786,7 @@ am_get_service_url(request_rec *r, LassoProfile *profile, char *service_name)
         AM_LOG_RERROR(APLOG_MARK, APLOG_WARNING, 0, r,
                       "Cannot find provider service %s, no provider.",
                       service_name);
-	return NULL;
+        return NULL;
     }
 
     url = lasso_provider_get_metadata_one(provider, service_name);
@@ -1794,7 +1794,7 @@ am_get_service_url(request_rec *r, LassoProfile *profile, char *service_name)
         AM_LOG_RERROR(APLOG_MARK, APLOG_WARNING, 0, r,
                       "Cannot find provider service %s from metadata.",
                       service_name);
-	return NULL;
+        return NULL;
     }
 
     return url;
