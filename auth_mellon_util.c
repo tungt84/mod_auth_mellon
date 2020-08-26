@@ -478,10 +478,10 @@ int am_check_permissions(request_rec *r, am_cache_entry_t *session)
                  match = !ap_regexec(ce->regex, value, 0, NULL, 0);
 
             } else if ((ce->flags & AM_COND_FLAG_SUB) && (ce->flags & AM_COND_FLAG_NC)) {
-                 match = (ap_strcasestr(ce->str, value) != NULL);
+                 match = (ap_strcasestr(value, ce->str) != NULL);
 
             } else if (ce->flags & AM_COND_FLAG_SUB) {
-                 match = (strstr(ce->str, value) != NULL);
+                 match = (strstr(value, ce->str) != NULL);
 
             } else if (ce->flags & AM_COND_FLAG_NC) {
                  match = !strcasecmp(ce->str, value);
