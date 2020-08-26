@@ -929,14 +929,6 @@ modules mod_headers and mod_setenvif. E.g. for PNG images:
 Editing, appending, and overwriting headers is possible in other cases.
 
 
-## Support
-
-There's a mailing list for discussion and support.
-
-* To subscribe: https://sympa.uninett.no/lists/uninett.no/subscribe/modmellon
-* List archives: https://sympa.uninett.no/lists/uninett.no/arc/modmellon
-
-
 ## Reporting security vulnerabilities
 
 For reporting security vulnerabilities in mod_auth_mellon, please contact
