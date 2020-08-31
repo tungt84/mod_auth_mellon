@@ -770,7 +770,7 @@ If this functionality is enabled, invalidate the session by calling
 the endpoint "<endpoint path>/invalidate?ReturnTo=<valid url>".
 The "ReturnTo" parameter is required.
 
-Here is a sample configuration to enabled this feature:
+Here is a sample configuration to enable this feature:
 ```ApacheConf
 MellonEnabledInvalidateSessionEndpoint On
 ```
@@ -778,10 +778,10 @@ Default value is Off
 
 
 ## Send Expect Header
-The Expect Header save an additional network round-trip and is thus a good idea when
+The Expect Header saves an additional network round-trip and is thus a good idea when
 the request isn't extremely large and the probability for rejection is low.
-For some Apache server version, the Expect Header is not properly managed and the curl command will 
-wait for 1 sec. before sending the body of the request. 
+For some Apache server versions, the Expect Header is not properly managed and a curl command will
+wait for 1 second before sending the body of the request.
 If the Expect Header is not present, there won't be wait time in the HTTP-Artifact binding.
 
 Here is a sample configuration to not send the Expect header:
