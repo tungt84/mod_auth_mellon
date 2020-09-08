@@ -828,7 +828,7 @@ static int am_cond_flags(const char *arg)
     };
     apr_size_t options_count = sizeof(options) / sizeof(*options);
     
-    /* Skip inital [ */
+    /* Skip initial [ */
     if (arg[0] == '[')
         arg++;
     else

@@ -329,7 +329,7 @@ am_cache_entry_t *am_cache_new(request_rec *r,
     current_time = apr_time_now();
 
     /* We will use 't' to remember the best/oldest entry. We
-     * initalize it to the first entry in the table to simplify the
+     * initialize it to the first entry in the table to simplify the
      * following code (saves test for t == NULL).
      */
     t = am_cache_entry_ptr(mod_cfg, table, 0);
