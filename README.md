@@ -504,34 +504,33 @@ MellonDiagnosticsEnable Off
         # The IdP discovery must redirect the user to the return URL, 
         # with returnIDParam set to the selected IdP entityId.
         # 
-        # The builtin:get-metadata discovery URL is not supported anymore
-        # starting with 0.3.1. See MellonProbeDiscoveryTimeout for
-        # a replacement.
+        # See also MellonProbeDiscovery options below for an alternative
+        # way to deal with discovery.
         #
         # Default: None set.
         MellonDiscoveryURL "http://www.example.net/idp-discovery"
 
         # MellonProbeDiscoveryTimeout sets the timeout of the
         # IdP probe discovery service, which is available on the
-        # probeDisco endoint.
+        # probeDisco endpoint.
         #
         # This will cause the SP to send HTTP GET requests on the 
-        # configured IdP PorviderID URL. Theses URL should be used to
+        # configured IdP PorviderID URL. This URL should be used to
         # publish metadata, though this is not mandatory. If the IdP
-        # returns an HTTP status 200, then the IdP is selected. 
-        # If the PorviderID URL requires SSL, MellonIdPCAFile is used
+        # returns an HTTP status 200, then the IdP is selected.
+        # If the ProviderID URL requires SSL, MellonIdPCAFile is used
         # as a trusted CA bundle.
         #
         # Default: unset, which means the feature is disabled
         # MellonProbeDiscoveryTimeout 1
 
         # MellonProbeDiscoveryIdP can be used to restrict the 
-        # list of IdP queried by the IdP probe discovery service.
-        # If probe discovery fails and this is provided, an
+        # list of IdPs queried by the IdP probe discovery service.
+        # If probe discovery fails and this list is provided, an
         # HTTP error 500 is returned, instead of proceeding
         # with first available IdP.
         #
-        # Default unset, which means that all configured IdP are 
+        # Default unset, which means that all configured IdPs are
         # queried.
         # MellonProbeDiscoveryIdP http://idp1.example.com/saml/metadata
         # MellonProbeDiscoveryIdP http://idp2.example.net/saml/metadata
