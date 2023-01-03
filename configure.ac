@@ -2,7 +2,7 @@ AC_INIT([mod_auth_mellon],[0.18.1],[https://github.com/latchset/mod_auth_mellon/
 AC_CONFIG_HEADERS([config.h])
 
 # We require support for C99.
-AC_PROG_CC_C99
+m4_version_prereq([2.70], [AC_PROG_CC], [AC_PROG_CC_C99])
 
 AC_SUBST(NAMEVER, AC_PACKAGE_TARNAME()-AC_PACKAGE_VERSION())
 
