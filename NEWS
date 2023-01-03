@@ -1,3 +1,14 @@
+Version 0.18.1
+---------------------------------------------------------------------------
+
+Enhancements:
+
+* Logout endpoint can handle POST response.
+
+* Ensure compatibility with OpenSSL 3.
+
+* Add encryption certificate in mellon_create_metadata.sh.
+
 Version 0.18.0
 ---------------------------------------------------------------------------
 
