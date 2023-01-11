@@ -452,14 +452,20 @@ MellonDiagnosticsEnable Off
 
         # MellonIdPMetadataFile is the full path to the file which contains
         # metadata for the IdP you are authenticating against. This
-        # directive is required. Multiple IdP metadata can be configured
-        # by using multiple MellonIdPMetadataFile directives.
+        # directive is required.
         #
+        # An optional validating chain can be supplied as a second argument
+        # to MellonIdPMetadataFile. If omitted, no metadata validation will
+        # take place.
+        #
+        # Multiple IdP metadata can be configured by using multiple
+        # MellonIdPMetadataFile directives.
         # If your lasso library is recent enough (higher than 2.3.5),
         # then MellonIdPMetadataFile will accept an XML file containing
-        # descriptors for multiple IdP. An optional validating chain can
-        # be supplied as a second argument to MellonIdPMetadataFile. If
-        # omitted, no metadata validation will take place.
+        # descriptors for multiple IdPs.
+        # If you have multiple IdPs enabled, you will need to provide a
+        # discovery method to pick the right IdP for this user (see below),
+        # if none is given, Mellon will fall back to the first listed.
         #
         # Default: None set.
         MellonIdPMetadataFile /etc/apache2/mellon/idp-metadata.xml
