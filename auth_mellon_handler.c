@@ -751,8 +751,10 @@ static int am_handle_logout_request(request_rec *r,
                       "Error processing logout request message."
                       " No session found for NameID %s",
                       ((LassoSaml2NameID*)logout->parent.nameIdentifier)->content);
-
+	
+        session = am_get_request_session(r);
     }
+    
 
     am_diag_log_cache_entry(r, 0, session, "%s", __func__);
 
