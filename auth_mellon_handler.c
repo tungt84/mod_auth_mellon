@@ -753,6 +753,11 @@ static int am_handle_logout_request(request_rec *r,
                       ((LassoSaml2NameID*)logout->parent.nameIdentifier)->content);
 	
         session = am_get_request_session(r);
+	if(session == NULL)
+	    AM_LOG_RERROR(APLOG_MARK, APLOG_ERR, 0, r,
+                      "Error processing logout request message."
+                      " No session found for NameID %s",
+                      ((LassoSaml2NameID*)logout->parent.nameIdentifier)->content); 
     }
     
 
