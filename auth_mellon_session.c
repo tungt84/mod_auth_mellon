@@ -35,6 +35,51 @@ APLOG_USE_MODULE(auth_mellon);
  * Returns:
  *  The session associated, or NULL if unable to retrieve the given session.
  */
+am_cache_entry_t *am_lock_and_validate_skip_check_mismatch(request_rec *r,
+                                       am_cache_key_t type,
+                                       const char *key)
+{
+    am_cache_entry_t *session = NULL;
+
+    am_diag_printf(r, "searching for session with key %s (%s) ... ",
+                   key, am_diag_cache_key_type_str(type));
+
+    session = am_cache_lock(r, type, key);
+    if (session == NULL) {
+        am_diag_printf(r, "not found\n");
+        return NULL;
+    } else {
+        am_diag_printf(r, "found.\n");
+        am_diag_log_cache_entry(r, 0, session, "Session Cache Entry");
+    }
+
+    const char *cookie_token_session = am_cache_entry_get_string(
+        session, &session->cookie_token);
+    const char *cookie_token_target = am_cookie_token(r);
+    if (strcmp(cookie_token_session, cookie_token_target)) {
+        AM_LOG_RERROR(APLOG_MARK, APLOG_ERR, 0, r,
+                      "Session cookie parameter mismatch. "
+                      "Session created with {%s}, but current "
+                      "request has {%s}.",
+                      cookie_token_session,
+                      cookie_token_target);
+        am_cache_unlock(r, session);
+        return NULL;
+    }
+
+    return session;
+}
+
+/* Retrieve a session from the cache and validate its cookie settings
+ *
+ * Parameters:
+ *  request_rec *r       The request we received from the user.
+ *  am_cache_key_t type  AM_CACHE_SESSION, AM_CACHE_NAMEID or AM_CACHE_ASSERTIONID
+ *  const char *key      The session key or user
+ *
+ * Returns:
+ *  The session associated, or NULL if unable to retrieve the given session.
+ */
 am_cache_entry_t *am_lock_and_validate(request_rec *r,
                                        am_cache_key_t type,
                                        const char *key)
